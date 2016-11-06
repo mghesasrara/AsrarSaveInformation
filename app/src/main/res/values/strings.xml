@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AsrarSaveInformation</string>
+    <string name="logout">logout</string>
+    <string name="setting">setting</string>
+    <string name="pssword" />
+    <string name="email" />
+    <string name="save" />
+    <string name="email1">email1</string>
+    <string name="password1">password1</string>
+    <string name="save1">save1</string>
+</resources>
