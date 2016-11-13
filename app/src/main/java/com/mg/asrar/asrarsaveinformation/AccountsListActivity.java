@@ -16,6 +16,7 @@ public class AccountsListActivity extends AppCompatActivity {
     protected ImageButton btnplus;
     protected EditText ettext;
     protected ListView Listviewaccounts;
+    protected MyAdapterAccount myadabter;
 
 
     @Override
@@ -25,7 +26,8 @@ public class AccountsListActivity extends AppCompatActivity {
         btnplus = (ImageButton) findViewById(R.id.btnplus);
         ettext = (EditText) findViewById(R.id.ettext);
         Listviewaccounts = (ListView) findViewById(R.id.listViewaccounts);
-
+        myadabter=new MyAdapterAccount(this, R.layout.item_my_account);
+        Listviewaccounts.setAdapter(myadabter);
         eventHandler();
     }
 

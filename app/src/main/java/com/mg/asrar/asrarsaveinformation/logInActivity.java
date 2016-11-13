@@ -35,6 +35,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 public class logInActivity extends AppCompatActivity {
+    private static final String KEY_NAME = "example_key";
     private ImageButton imageButton;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
@@ -60,11 +61,13 @@ public class logInActivity extends AppCompatActivity {
             throw new RuntimeException(
                     "Failed to get KeyGenerator instance", e);
         }
-    }
 
-    try {
 
-        keyStore.load(null);
+    try  {
+
+
+            keyStore.load(null);
+
         keyGenerator.init(new
                 KeyGenParameterSpec.Builder(KEY_NAME,
                 KeyProperties.PURPOSE_ENCRYPT |
@@ -117,8 +120,8 @@ public class logInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.setValue( "hello asrar");
-        imageButton=(ImageButton)findViewById(R.id.imageButton);
+
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
 
         keyguardManager =
                 (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
@@ -133,7 +136,7 @@ public class logInActivity extends AppCompatActivity {
             return;
         }
 
-        if (checkSelfPermission(this,Manifest.permission.USE_FINGERPRINT) !=
+        if (checkSelfPermission(android.Manifest.permission.USE_FINGERPRINT) !=
                 PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this,
                     "Fingerprint authentication permission not enabled",
@@ -166,12 +169,16 @@ public class logInActivity extends AppCompatActivity {
         if (cipherInit()) {
             cryptoObject =
                     new FingerprintManager.CryptoObject(cipher);
+
+
+            cryptoObject = new FingerprintManager.CryptoObject(cipher);
+            FingerPrintHandler helper = new FingerPrintHandler(this);
+            helper.startAuth(fingerprintManager, cryptoObject);
         }
 
+            eventHandler();
 
-
-        eventHandler();
-    }
+        }
 
 
     private void eventHandler()
